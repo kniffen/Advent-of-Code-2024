@@ -5,5 +5,8 @@ public class Main {
     System.out.println("\nDay 001");
     System.out.printf("Part 1: %s\n", Day001.part1());
     System.out.printf("Part 2: %s\n", Day001.part2());
+
+    System.out.println("\nDay 002");
+    System.out.printf("Part 1: %s\n", Day002.part1());
   }
 }
