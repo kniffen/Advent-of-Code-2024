@@ -9,5 +9,7 @@ public class Main {
     System.out.println("\nDay 002");
     System.out.printf("Part 1: %s\n", Day002.part1());
     System.out.printf("Part 2: %s\n", Day002.part2());
+
+    Day003.run();
   }
 }
