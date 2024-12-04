@@ -71,9 +71,38 @@ public class Day004 {
     return count;
   }
 
+  static int part2(String[] data) {
+    int rows = data.length;
+    int column = data[0].length();
+    int count = 0;
+
+    for (int y = 1; y < rows - 1; y++) {
+      for (int x = 1; x < column - 1; x++) {
+        char a = data[y].charAt(x);
+        if (data[y].charAt(x) != 'A') {
+          continue;
+        }
+
+        char[] b = {data[y-1].charAt(x-1), a, data[y+1].charAt(x+1)};
+        char[] c = {data[y-1].charAt(x+1), a, data[y+1].charAt(x-1)};
+        String d = String.valueOf(b);
+        String e = String.valueOf(c);
+
+        if ((d.equals("MAS") || d.equals("SAM")) && (e.equals("MAS") || e.equals("SAM"))) {
+          count++;
+        }
+      }
+
+    }
+
+    return count;
+  }
+
   public static void run() {
     System.out.println("\nDay 004");
     System.out.printf("Part 1 control: %s\n", part1(testData));
     System.out.printf("Part 1 answer: %s\n", part1(input));
+    System.out.printf("Part 2 control: %s\n", part2(testData));
+    System.out.printf("Part 2 answer: %s\n", part2(input));
   }
 }
