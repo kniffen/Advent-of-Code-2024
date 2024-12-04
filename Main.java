@@ -11,5 +11,6 @@ public class Main {
     System.out.printf("Part 2: %s\n", Day002.part2());
 
     Day003.run();
+    Day004.run();
   }
 }
