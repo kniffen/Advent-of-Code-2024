@@ -108,9 +108,46 @@ public class Day005 {
     return sum;
   }
 
+  static int part2(String[] data) {
+    ParsedInput parsedInput = parseInput(data);
+    int sum = 0;
+
+    for (int[] sequence : parsedInput.sequences) {
+      boolean wasUnordered = false;
+      for (int i = 0; i < parsedInput.rules.length - 1; i++) {
+        int[] rule = parsedInput.rules[i];
+        int[] indexes = getIndexes(sequence, rule);
+
+        if (indexes[0] == -1 || indexes[1] == -1) {
+          continue;
+        }
+
+        while (indexes[0] > indexes[1]) {
+          wasUnordered = true;
+
+          int temp = sequence[indexes[0]];
+          sequence[indexes[0]] = sequence[indexes[1]];
+          sequence[indexes[1]] = temp;
+
+          indexes = getIndexes(sequence, rule);
+          i = 0;
+        }
+      }
+
+      if (wasUnordered) {
+        int middleNum = sequence[Math.abs((sequence.length - 1) / 2)];
+        sum += middleNum;
+      }
+    }
+
+    return sum;
+  }
+
   static void run() {
     System.out.println("\nDay 005");
     System.out.printf("Part 1 control: %s\n", part1(testData));
     System.out.printf("Part 1 answer: %s\n", part1(input));
+    System.out.printf("Part 2 control: %s\n", part2(testData));
+    System.out.printf("Part 2 answer: %s\n", part2(input));
   }
 }
