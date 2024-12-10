@@ -15,6 +15,7 @@ public class Main {
     // Day005.run();
     // Day006.run();
     // Day007.run();
-    Day008.run();
+    // Day008.run();
+    Day010.run();
   }
 }
