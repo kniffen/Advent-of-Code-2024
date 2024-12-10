@@ -73,8 +73,7 @@ class Day010 {
     if (left   == n-1) { trace(map, left,   x-1, y,   path);}
   }
 
-  static int part1(String[] data) {
-    Map map = new Map(data);
+  static  ArrayList<ArrayList<Coord>> getPaths(Map map ) {
     ArrayList<ArrayList<Coord>> paths = new ArrayList<ArrayList<Coord>>();
 
     for (int y = 0; y < map.rows; y++){
@@ -87,6 +86,13 @@ class Day010 {
         }
       }
     }
+
+    return paths;
+  }
+
+  static int part1(String[] data) {
+    Map map = new Map(data);
+    ArrayList<ArrayList<Coord>> paths = getPaths(map);
 
     int score = 0;
     for (ArrayList<Coord> path : paths){
@@ -102,10 +108,28 @@ class Day010 {
     return score;
   }
 
+  static int part2(String[] data) {
+    Map map = new Map(data);
+    ArrayList<ArrayList<Coord>> paths = getPaths(map);
+
+    int sum = 0;
+    for (ArrayList<Coord> path : paths){
+      for (Coord coord : path){
+        if (coord.value == 0) {
+          sum++;
+        }
+      }
+    }
+
+    return sum;
+  }
+
   static void run() {
     System.out.println("\nDay 010");
     System.out.printf("Part 1 control: %s\n", part1(testData));
     System.out.printf("Part 1 answer: %s\n", part1(input));
+    System.out.printf("Part 2 control: %s\n", part2(testData));
+    System.out.printf("Part 2 answer: %s\n", part2(input));
   }
 
 }
