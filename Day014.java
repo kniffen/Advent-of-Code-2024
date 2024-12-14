@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 class Robot {
   int x, y;
@@ -54,6 +55,25 @@ public class Day014 {
     return robots;
   }
 
+  static void printGrid(Robot[] robots, int rows, int columns) {
+    for (int y = 0; y < rows; y++) {
+      for (int x = 0; x < columns; x++) {
+        boolean foundRobot = false;
+        for (Robot robot : robots) {
+          if (robot.x == x && robot.y == y) {
+            System.out.print("#");
+            foundRobot = true;
+            break;
+          }
+        }
+        if (!foundRobot) {
+          System.out.print(".");
+        }
+      }
+      System.out.println();
+    }
+  }
+
   static int part1(String[] data, int rows, int columns) {
     Robot[] robots = parseData(data);
     int seconds = 100;
@@ -84,9 +104,56 @@ public class Day014 {
     return sum;
   }
 
+  static void part2(String[] data, int rows, int columns) {
+    Robot[] robots = parseData(data);
+
+    int maxSeconds = 10_000;
+    for (int second = 1; second < maxSeconds; second++) {
+      for (Robot robot : robots) {
+        robot.move(rows, columns);
+      }
+
+      int clusters = 0;
+      for (int y = 0; y < rows-2; y++) {
+        for (int x = 0; x < columns-2; x++) {
+          int foundRobots = 0;
+          for (Robot robot : robots) {
+            if (
+              (robot.x == x   && robot.y == y) ||
+              (robot.x == x+1 && robot.y == y) ||
+              (robot.x == x+2 && robot.y == y) ||
+              (robot.x == x   && robot.y == y+1) ||
+              (robot.x == x+1 && robot.y == y+1) ||
+              (robot.x == x+2 && robot.y == y+1) ||
+              (robot.x == x   && robot.y == y+2) ||
+              (robot.x == x+1 && robot.y == y+2) ||
+              (robot.x == x+2 && robot.y == y+2)
+            ) {
+              foundRobots++;
+            }
+          }
+          if (foundRobots >= 9) {
+            clusters++;
+          }
+        }
+      }
+
+      if (clusters > 0) {
+        printGrid(robots, rows, columns);
+        System.out.printf("Potential tree found at %s seconds\n", second);
+        System.out.println("Press enter to continue");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+        System.out.println("Continuing...");
+      }
+
+    }
+  }
+
   static void run() {
     System.out.println("\nDay 014");
     System.out.printf("Part 1 control: %s\n", part1(testData, 7, 11));
     System.out.printf("Part 1 answer: %s\n", part1(input, 103,101));
+    part2(input, 103, 101);
   }
 }
