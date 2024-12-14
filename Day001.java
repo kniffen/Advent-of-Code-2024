@@ -54,4 +54,10 @@ public class Day001 {
 
     return String.valueOf(sum);
   }
+
+  public static void run() {
+    System.out.println("Day 001");
+    System.out.printf("Part 1: %s\n", part1());
+    System.out.printf("Part 2: %s\n", part2());
+  }
 }

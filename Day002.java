@@ -80,4 +80,10 @@ public class Day002 {
 
     return String.valueOf(validLineCount);
   }
+
+  public static void run() {
+    System.out.println("Day 002");
+    System.out.printf("Part 1: %s\n", part1());
+    System.out.printf("Part 2: %s\n", part2());
+  }
 }
