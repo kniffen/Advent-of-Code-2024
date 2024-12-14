@@ -89,9 +89,26 @@ public class Day013 {
     return score;
   }
 
+  static long part2(String[] data) {
+    Machine[] machines = parseInput(data);
+    long score = 0;
+    for (Machine machine : machines) {
+      long priceX = machine.price.x + 10000000000000L;
+      long priceY = machine.price.y + 10000000000000L;
+      double a = (double) (priceX * machine.b.y - priceY * machine.b.x) / (machine.a.x * machine.b.y - machine.a.y * machine.b.x);
+      double b = (double) (priceX - machine.a.x * a) / machine.b.x;
+
+      if (a % 1 == 0 && b % 1 == 0) {
+        score += a * 3 + b;
+      }
+    }
+    return score;
+  }
+
   static void run() {
     System.out.println("\nDay 013");
     System.out.printf("Part 1 control: %s\n", part1(testData));
     System.out.printf("Part 1 answer: %s\n", part1(input));
+    System.out.printf("Part 2 answer: %s\n", part2(input));
   }
 }
